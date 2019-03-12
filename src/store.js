@@ -3,26 +3,14 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// export default new Vuex.Store({
-//   state: {
-
-//   },
-//   mutations: {
-
-//   },
-//   actions: {
-
-//   }
-// })
-
 const state = {
-  userinfo: {}
+  userinfo: JSON.parse(localStorage.getItem('userinfo'))
 }
-console.log(state.userinfo)
 
 const mutations = {
   SAVE_USERINFO (state,userinfo){
-    state.usdrinfo = userinfo
+    localStorage.setItem('userinfo',JSON.stringify(userinfo))
+    state.userinfo = userinfo
   }
 }
 

@@ -22,7 +22,7 @@ export default {
               duration: 1000
             });
             _this.$store.commit('SAVE_USERINFO', response.data)
-
+            
 
 
             _this.$router.push("/")
