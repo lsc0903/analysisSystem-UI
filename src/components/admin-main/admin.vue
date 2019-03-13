@@ -7,10 +7,10 @@
       <div class="line"></div>
       <el-container>
         <el-aside width="200px">
-            <admin-left></admin-left>
+          <admin-left></admin-left>
         </el-aside>
         <el-main>
-            <router-view></router-view>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -25,15 +25,15 @@ export default {
   name: "app",
   components: {
     adminHeader: adminHeader,
-    adminLeft: adminLeft,
+    adminLeft: adminLeft
   }
 };
 </script>
 
 <style scope>
 .line {
-    height: 1px;
-    background-color: #e0e6ed;
+  height: 1px;
+  background-color: #e0e6ed;
 }
 .el-header {
   color: #333;
@@ -48,8 +48,6 @@ export default {
 
 .el-main {
   color: #333;
-  text-align: center;
-  line-height: 160px;
 }
 
 body > .el-container {

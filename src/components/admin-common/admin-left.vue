@@ -2,16 +2,13 @@
   <el-col :span="24">
     <el-menu
       router
-      default-active="2"
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
     >
       <el-menu-item index="adminUser">
         <i class="el-icon-service"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
-      <el-submenu index="1">
+      <el-submenu index="">
         <template slot="title">
           <i class="el-icon-tickets"></i>
           <span>基础数据管理</span>
@@ -35,15 +32,7 @@
 <script>
 export default {
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    }
+    
   }
 };
 </script>

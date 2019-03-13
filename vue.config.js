@@ -2,10 +2,10 @@
 module.exports = {
     // 修改的配置
     // 将baseUrl: '/api',改为baseUrl: '/',baseUrl已被弃用，改为publicPath
-    publicPath: '/show',
+    publicPath: '/',
     devServer: {
         open:true,
-        port:8080,
+        port:6060,
         // https:true,
         proxy: {
             '/api': {

@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="12" class="ana-header-left">
-        <div>
+      <div>
         <router-link
           data-v-8c30bf14
           to="/admin"
@@ -11,7 +11,7 @@
           <i class="el-icon-setting"></i>
           <span>AnalysisSystem</span>
         </router-link>
-        </div>
+      </div>
     </el-col>
     <el-col :span="12" class="ana-header-right">
       <div class="ana-header-right">
