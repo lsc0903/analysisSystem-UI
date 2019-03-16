@@ -10,7 +10,7 @@
       <el-table-column label="类型" prop="category_type"></el-table-column>
       <el-table-column label="名称" prop="category_name"></el-table-column>
       <el-table-column align="right">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <el-input v-model="search" size="mini" @keyup.enter.native=handleSearch placeholder="输入关键字搜索"/>
         </template>
         <template slot-scope="scope">
@@ -40,7 +40,7 @@
           <el-input v-model="form.category_coding" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="作品类别类型" :label-width="formLabelWidth" prop="category_type">
-          <el-select v-model="form.category_type" placeholder="请选作品类别类型">
+          <el-select v-model="form.category_type" style="width:100%" placeholder="请选作品类别类型">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -52,14 +52,13 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelPerform">取 消</el-button>
-        <el-button type="primary" @click="performSaveCategory('form')">确 定</el-button>
+        <el-button type="primary" @click="performSaveCategory()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     // 定义model，tableData：表格数据，search：搜索关键词，currentPage:当前页码，total：记录总条数,pageSize
@@ -165,7 +164,7 @@ export default {
           }
         });
     },
-    performSaveCategory(form) {
+    performSaveCategory() {
       const _this = this;
       _this.$refs.form.validate(valid => {
         if (!valid) {

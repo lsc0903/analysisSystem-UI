@@ -24,7 +24,7 @@
             <p>区县: {{ scope.row.county }}</p>
             <p>地址: {{ scope.row.address }}</p>
             <p>简介: {{ scope.row.introduction }}</p>
-            <p>类别: {{ scope.row.category }}</p>
+            <p>类别: {{ scope.row.categoryName }}</p>
             <div slot="reference" class="name-wrapper">
               <el-tag size="medium">{{ scope.row.university_name }}</el-tag>
             </div>
@@ -39,7 +39,7 @@
       <!-- <el-table-column label="区县" prop="county"></el-table-column> -->
       <el-table-column label="地址" prop="address"></el-table-column>
       <!-- <el-table-column label="简介" prop="introduction"></el-table-column> -->
-      <el-table-column label="类别" prop="category"></el-table-column>
+      <el-table-column label="类别" prop="categoryName"></el-table-column>
       <el-table-column align="right">
         <template slot="header">
           <el-input
@@ -91,8 +91,16 @@
         <el-form-item label="简介" :label-width="formLabelWidth" prop="introduction">
           <el-input v-model="form.introduction" autocomplete="off"></el-input>
         </el-form-item>
+
         <el-form-item label="类别" :label-width="formLabelWidth" prop="category">
-          <el-input v-model="form.category" autocomplete="off"></el-input>
+          <el-select v-model="form.category" style="width:100%" placeholder="请选高校类别">
+            <el-option
+              v-for="item in categoryOptions"
+              :key="item.uni_type_id"
+              :value="item.uni_type_id"
+              :label="item.uni_type_name"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -109,6 +117,7 @@ export default {
   data() {
     // 定义model，tableData：表格数据，search：搜索关键词，currentPage:当前页码，total：记录总条数,pageSize
     return {
+      categoryOptions: [],
       options: regionData,
       formLoading: false,
       tableLoading: false,
@@ -481,7 +490,7 @@ export default {
     let _this = this;
     _this.tableLoading = true;
     //发送请求，获取数据
-    this.$http
+    _this.$http
       .post("/api/findUniversityListByPage", {
         //当前页0，PageSize400
         currentPage: 1,
@@ -502,6 +511,12 @@ export default {
           return false;
         }
       });
+
+    _this.$http.get("/api/findAllUniType").then(response =>{
+      if(response.data.rtnCode == 200){
+        _this.categoryOptions = response.data.data;
+      }
+    });
   }
 };
 </script>

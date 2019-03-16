@@ -14,7 +14,7 @@
       <el-table-column label="编码" prop="source_coding"></el-table-column>
       <el-table-column label="名称" prop="source_name"></el-table-column>
       <el-table-column align="right">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <el-input
             v-model="search"
             size="mini"
@@ -51,14 +51,13 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelPerform">取 消</el-button>
-        <el-button type="primary" @click="performSaveSource('form')">确 定</el-button>
+        <el-button type="primary" @click="performSaveSource()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     // 定义model，tableData：表格数据，search：搜索关键词，currentPage:当前页码，total：记录总条数,pageSize
@@ -144,7 +143,7 @@ export default {
           }
         });
     },
-    performSaveSource(form) {
+    performSaveSource() {
       const _this = this;
       _this.$refs.form.validate(valid => {
         if (!valid) {

@@ -14,7 +14,7 @@
       <el-table-column label="编码" prop="uni_type_coding"></el-table-column>
       <el-table-column label="名称" prop="uni_type_name"></el-table-column>
       <el-table-column align="right">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <el-input
             v-model="search"
             size="mini"
@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     // 定义model，tableData：表格数据，search：搜索关键词，currentPage:当前页码，total：记录总条数,pageSize
@@ -144,7 +143,7 @@ export default {
           }
         });
     },
-    performSaveUniType(form) {
+    performSaveUniType() {
       const _this = this;
       _this.$refs.form.validate(valid => {
         if (!valid) {
