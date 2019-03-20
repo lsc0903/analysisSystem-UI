@@ -41,7 +41,7 @@
       <!-- <el-table-column label="简介" prop="introduction"></el-table-column> -->
       <el-table-column label="类别" prop="categoryName"></el-table-column>
       <el-table-column align="right">
-        <template slot="header">
+        <template slot="header" slot-scope="scope">
           <el-input
             v-model="search"
             size="mini"

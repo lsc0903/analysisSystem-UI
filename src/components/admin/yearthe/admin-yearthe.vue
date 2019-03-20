@@ -17,7 +17,7 @@
       <el-table-column label="届" prop="the"></el-table-column>
       <el-table-column label="年份" prop="year"></el-table-column>
       <el-table-column align="right">
-        <template slot="header">
+        <template slot="header" slot-scope="scope">
           <el-input
             v-model="search"
             size="mini"

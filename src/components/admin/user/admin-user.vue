@@ -16,7 +16,7 @@
       <el-table-column label="姓名" prop="name"></el-table-column>
       <el-table-column label="联系方式" prop="phone"></el-table-column>
       <el-table-column align="right">
-        <template slot="header">
+        <template slot="header" slot-scope="scope">
           <el-input
             v-model="search"
             size="mini"

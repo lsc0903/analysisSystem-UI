@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style>
-
+#app,#nav{
+  height: 100%;
+};
 </style>

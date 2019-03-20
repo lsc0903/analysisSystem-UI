@@ -15,6 +15,14 @@ module.exports = {
                 pathRewrite: {
                     '^/api': ''
                 }
+            },
+            '/works': {
+                target: 'http://localhost:8001',
+                changeOrigin: true,
+                ws: true,
+                pathRewrite: {
+                    '^/works': ''
+                }
             }
         }
     }

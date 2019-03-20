@@ -22,13 +22,51 @@ const AdminUser = () => import('@/components/admin/user/admin-user.vue');
 const AdminResults = () => import('@/components/admin/results/admin-results.vue');
 //前端展示路由
 const Show = () => import('@/components/show-main/show.vue');
+const ShowHeader = () => import('@/components/show-comon/show-header.vue');
+const ShowIndex = () => import('@/components/show/show-index.vue');
+const ShowSearch = () => import('@/components/show/show-search.vue');
+const ShowContrast = () => import('@/components/show/show-contrast.vue');
+const ShowUniversityRanking = () => import('@/components/show/show-university-ranking.vue');
+const ShowDetails = () => import('@/components/show/show-details.vue');
 
 export default new Router({
   mode: 'history',
   routes: [{
       path: '/',
       name: 'show',
-      component: Show
+      component: Show,
+      redirect: 'showIndex',
+      children: [{
+          path: '/',
+          name: 'showIndex',
+          component: ShowIndex
+        },
+        {
+          path: '/showSearch',
+          name: 'showSearch',
+          component: ShowSearch
+        },
+        {
+          path: '/showContrast',
+          name: 'showContrast',
+          component: ShowContrast
+        },
+        {
+          path: '/showUniversityRanking',
+          name: 'showUniversityRanking',
+          component: ShowUniversityRanking
+        },
+        {
+          path: '/showDetails/:id',
+          name: 'showDetails',
+          component: ShowDetails
+        },
+      ]
+    },
+    {
+      path: '/showHeader',
+      name: 'showHeader',
+      component: ShowHeader
     },
     {
       path: '/adminHeader',

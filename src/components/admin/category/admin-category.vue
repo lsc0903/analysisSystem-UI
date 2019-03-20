@@ -10,7 +10,7 @@
       <el-table-column label="类型" prop="category_type"></el-table-column>
       <el-table-column label="名称" prop="category_name"></el-table-column>
       <el-table-column align="right">
-        <template slot="header">
+        <template slot="header" slot-scope="scope">
           <el-input v-model="search" size="mini" @keyup.enter.native=handleSearch placeholder="输入关键字搜索"/>
         </template>
         <template slot-scope="scope">

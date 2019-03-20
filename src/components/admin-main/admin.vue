@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-container>
+    <el-container style="height: 100%;" directiion="vertical">
       <el-header>
         <admin-header></admin-header>
       </el-header>

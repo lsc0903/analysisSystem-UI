@@ -14,7 +14,7 @@
       <el-table-column label="编码" prop="source_coding"></el-table-column>
       <el-table-column label="名称" prop="source_name"></el-table-column>
       <el-table-column align="right">
-        <template slot="header">
+        <template slot="header" slot-scope="scope">
           <el-input
             v-model="search"
             size="mini"
