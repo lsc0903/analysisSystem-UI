@@ -138,23 +138,23 @@
           <el-upload
             limt="3"
             accept=".jpg, .jpeg, .png, .gif, .JPG, .JPEG, .PNG, .GIF"
-            drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            multiple
+            list-type="picture-card"
+            :action="actionPath"
+            :data="postData"
             :before-upload="beforeUpload"
             :limit="3"
             :on-exceed="handleExceed"
             :on-error="handleError"
             :on-remove="handleRemove"
             :on-success="handleSuccess"
+            :on-preview="handlePictureCardPreview"
+            :file-list="form.imgUrls"
           >
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">
-              将文件拖到此处，或
-              <em>点击上传</em>
-            </div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+          <i class="el-icon-plus"></i>
           </el-upload>
+          <el-dialog :visible.sync="dialogVisible" :modal.sync="modal">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -170,6 +170,15 @@ export default {
   data() {
     // 定义model，tableData：表格数据，search：搜索关键词，currentPage:当前页码，total：记录总条数,pageSize
     return {
+      dialogImageUrl: '',
+      dialogVisible: false,
+      modal: false,
+
+      actionPath: "http://upload-z1.qiniup.com",
+      postData: {
+        token: ""
+      },
+
       formLoading: false,
       tableLoading: false,
       dialogFormVisible: false,
@@ -260,17 +269,29 @@ export default {
     };
   },
   methods: {
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
     handleRemove(file, fileList) {
-      console.log(file);
+      var tag = null;
+      this.form.imgUrls.forEach((element, index) => {
+        if (element.uid == element.uid) {
+          tag = index;
+        }
+      });
+      if (tag != null) {
+        this.form.imgUrls.splice(tag, 1);
+      }
     },
-    handleSuccess(response, file, fileList) {
-      this.form.imgUrls.push({ id: response.id, uid: file.uid });
+    handleSuccess(response, file) {
+      var imgUrl = "http://poih8r8be.bkt.clouddn.com/" + response.key;
+      this.$data.form.imgUrls.push({ uid: file.uid, url: imgUrl, imgName: file.name });
     },
-    handleError(err, file, fileList) {
+    handleError(err, file) {
       this.$message.warning(file.name + "上传失败");
     },
     beforeUpload(file) {
-      console.log(this.form.imgUrls);
       const isLt2M = file.size / 1024;
       if (isLt2M > 500) {
         this.$message({
@@ -342,7 +363,11 @@ export default {
             _this.form.workName = response.data.data.workName;
             _this.form.sourceID = response.data.data.sourceID;
             _this.form.workIntroduction = response.data.data.workIntroduction;
-            _this.form.imgUrls = response.data.data.imgUrls;
+            if (response.data.data.imgUrls != null) {
+              _this.form.imgUrls = response.data.data.imgUrls;
+            } else {
+              _this.form.imgUrls = [];
+            }
           } else {
             _this.$message.error("服务出现问题，请稍后重试");
           }
@@ -537,6 +562,13 @@ export default {
       if (response.data.rtnCode == 200) {
         _this.yearTheOptions = response.data.data;
       }
+    });
+    var that = this;
+    /**
+     * 获取七牛云token
+     */
+    that.$http.get("/qiniu/findeQiNiuToken").then(function(res) {
+      that.postData.token = res.data;
     });
   }
 };

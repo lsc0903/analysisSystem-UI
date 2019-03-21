@@ -5,68 +5,90 @@
         <el-col :span="24" style="ma">
           <el-row>
             <strong class="screen-strong">地区：</strong>
-            <el-checkbox v-for="item in vals" :key="item">{{item}}</el-checkbox>
+            <el-checkbox-group v-model="provinceList" size="small">
+              <el-checkbox v-for="item in province" :label="item" :key="item" @change="search"></el-checkbox>
+            </el-checkbox-group>
           </el-row>
           <el-row>
             <strong class="screen-strong">类型一：</strong>
-            <el-checkbox v-for="item in vals" :key="item">{{item}}</el-checkbox>
+            <el-checkbox-group v-model="categoryOneList" size="small">
+              <el-checkbox
+                v-for="item in categoryOne"
+                :label="item.id"
+                :key="item.id"
+                @change="search"
+              >{{ item.value }}</el-checkbox>
+            </el-checkbox-group>
           </el-row>
           <el-row>
             <strong class="screen-strong">类型二：</strong>
-            <el-checkbox v-for="item in vals" :key="item">{{item}}</el-checkbox>
+            <el-checkbox-group v-model="categoryTwoList" size="small">
+              <el-checkbox
+                v-for="item in categoryTwo"
+                :label="item.id"
+                :key="item.id"
+                @change="search"
+              >{{ item.value }}</el-checkbox>
+            </el-checkbox-group>
           </el-row>
           <el-row>
             <strong class="screen-strong">来源：</strong>
-            <el-checkbox v-for="item in vals" :key="item">{{item}}</el-checkbox>
+            <el-checkbox-group v-model="sourceList" size="small">
+              <el-checkbox
+                v-for="item in source"
+                :label="item.id"
+                :key="item.id"
+                @change="search"
+              >{{ item.value }}</el-checkbox>
+            </el-checkbox-group>
           </el-row>
           <el-row>
             <strong class="screen-strong">年份-届：</strong>
-            <el-checkbox v-for="item in vals" :key="item">{{item}}</el-checkbox>
+            <el-checkbox-group v-model="yearTheList" size="small">
+              <el-checkbox
+                v-for="item in yearThe"
+                :label="item.id"
+                :key="item.id"
+                @change="search"
+              >{{ item.value }}</el-checkbox>
+            </el-checkbox-group>
           </el-row>
           <el-row>
             <strong class="screen-strong">获奖等级：</strong>
-            <el-checkbox v-for="item in vals" :key="item">{{item}}</el-checkbox>
+            <el-checkbox-group v-model="levelList" size="small">
+              <el-checkbox
+                v-for="item in level"
+                :label="item.id"
+                :key="item.id"
+                @change="search"
+              >{{ item.value }}</el-checkbox>
+            </el-checkbox-group>
           </el-row>
         </el-col>
       </el-card>
     </el-row>
 
     <el-row>
-      <el-table :data="tableData5" row-key="id" style="width: 100%">
+      <el-table
+        :data="tableData"
+        row-key="name"
+        :default-sort="{prop: 'value', order: 'descending'}"
+        style="width: 100%"
+      >
         <el-table-column type="expand">
           <template v-slot="props">
             <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="商品名称">
-                <span>{{ props.row.name }}</span>
-              </el-form-item>
-              <el-form-item label="所属店铺">
-                <span>{{ props.row.shop }}</span>
-              </el-form-item>
-              <el-form-item label="商品 ID">
-                <span>{{ props.row.id }}</span>
-              </el-form-item>
-              <el-form-item label="店铺 ID">
-                <span>{{ props.row.shopId }}</span>
-              </el-form-item>
-              <el-form-item label="商品分类">
-                <span>{{ props.row.category }}</span>
-              </el-form-item>
-              <el-form-item label="店铺地址">
-                <span>{{ props.row.address }}</span>
-              </el-form-item>
-              <el-form-item label="商品描述">
-                <span>{{ props.row.desc }}</span>
+              <el-form-item :label="item.name" v-for="item in props.row.levelInfo" :key="item.name">
+                <span>{{ item.sum }}</span>
               </el-form-item>
               <el-form-item>
-                <router-link  :to="'showDetails/'+props.row.id">查看详情</router-link>
-                <!-- <router-link :to="{path:'/workTaskEdit',query{id:id}}"></router-link> -->
+                <router-link :to="'showDetails/'+props.row.id">查看详情</router-link>
               </el-form-item>
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column label="商品 ID" prop="id"></el-table-column>
-        <el-table-column label="商品名称" prop="name"></el-table-column>
-        <el-table-column label="描述" prop="desc"></el-table-column>
+        <el-table-column label="高校名" prop="name"></el-table-column>
+        <el-table-column label="获奖总数" prop="value"></el-table-column>
       </el-table>
     </el-row>
   </el-row>
@@ -165,48 +187,61 @@ export default {
           }
         ]
       },
-      tableData5: [
-        {
-          id: "12987122",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        },
-        {
-          id: "12987123",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        },
-        {
-          id: "12987125",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        },
-        {
-          id: "12987126",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        }
-      ],
-      vals: ["类型一", "类型二", "类型三"]
+      tableData: [],
+      categoryOne: [],
+      categoryTwo: [],
+      level: [],
+      province: [],
+      source: [],
+      yearThe: [],
+      categoryOneList: [],
+      categoryTwoList: [],
+      levelList: [],
+      provinceList: [],
+      sourceList: [],
+      yearTheList: []
     };
   },
-  methods: {}
+  methods: {
+    search() {
+      this.$options.methods.toSearch(this);
+    },
+    toSearch(_this) {
+      _this.$http
+        .post("/works/findRankInfo", {
+          categoryOneList: _this.categoryOneList,
+          categoryTwoList: _this.categoryTwoList,
+          levelList: _this.levelList,
+          provinceList: _this.provinceList,
+          sourceList: _this.sourceList,
+          yearTheList: _this.yearTheList
+        })
+        .then(response => {
+          if (response.data.rtnCode == 200) {
+            _this.tableData = response.data.data;
+          } else {
+            _this.$message.error("数据加载失败");
+          }
+        });
+    }
+  },
+  created() {
+    this.$options.methods.toSearch(this);
+  },
+  mounted() {
+    this.$http.get("/works/findRankParam").then(response => {
+      if (response.data.rtnCode == 200) {
+        this.categoryOne = response.data.data.categoryOne;
+        this.categoryTwo = response.data.data.categoryTwo;
+        this.level = response.data.data.level;
+        this.province = response.data.data.province;
+        this.source = response.data.data.source;
+        this.yearThe = response.data.data.yearThe;
+      } else {
+        this.$message.error("数据加载错误");
+      }
+    });
+  }
 };
 </script>
 
@@ -237,6 +272,7 @@ export default {
 .screen-strong {
   display: inline-block;
   width: 90px;
-  text-align: right;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 </style>

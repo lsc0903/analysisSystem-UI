@@ -23,7 +23,7 @@ import "echarts/map/js/china.js";
 export default {
   data() {
     return {
-      mapOptions: {
+      mapOption: {
         //标题
         title: {
           text: "全国“挑战杯”成果分布图",
@@ -37,9 +37,15 @@ export default {
             return params.name + " : " + params.value[2];
           }
         },
+
         //对地图的渲染
         geo: {
           map: "china",
+          scaleLimit: {
+            min: 1,
+            max: 10
+          },
+          roam: true,
           label: {
             emphasis: {
               show: true
@@ -59,7 +65,7 @@ export default {
           {
             type: "scatter",
             coordinateSystem: "geo",
-            data: [{ name: "海门大学", value: [116.29, 37.45, 9] }],
+            data: [],
             symbolSize: 12,
             label: {
               normal: {
@@ -92,9 +98,6 @@ export default {
             type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
           }
         },
-        legend: {
-          data: ["邮件营销", "联盟广告", "视频广告"]
-        },
         grid: {
           left: "3%",
           right: "4%",
@@ -104,7 +107,10 @@ export default {
         xAxis: [
           {
             type: "category",
-            data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            data: [],
+            axisTick: {
+              alignWithLabel: true
+            }
           }
         ],
         yAxis: [
@@ -114,44 +120,20 @@ export default {
         ],
         series: [
           {
-            name: "邮件营销",
+            name: "获奖总数",
             type: "bar",
-            stack: "广告",
+            barWidth: "60%",
             label: {
               normal: {
                 show: true,
-                position: "insideRight"
+                position: "top"
               }
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: "联盟广告",
-            type: "bar",
-            stack: "广告",
-            label: {
-              normal: {
-                show: true,
-                position: "insideRight"
-              }
-            },
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: "视频广告",
-            type: "bar",
-            stack: "广告",
-            label: {
-              normal: {
-                show: true,
-                position: "insideRight"
-              }
-            },
-            data: [150, 232, 201, 154, 190, 330, 410]
+            data: []
           }
         ]
       },
-      breadOptions: {
+      breadOption: {
         title: {
           text: "全国“挑战杯”成果占比图",
           subtext: "data from “挑战杯”大赛",
@@ -163,17 +145,11 @@ export default {
         },
         series: [
           {
-            name: "访问来源",
+            name: "获奖",
             type: "pie",
             radius: "55%",
             center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "直接访问" },
-              { value: 310, name: "邮件营销" },
-              { value: 234, name: "联盟广告" },
-              { value: 135, name: "视频广告" },
-              { value: 1548, name: "搜索引擎" }
-            ],
+            data: [],
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
@@ -187,15 +163,41 @@ export default {
     };
   },
   mounted() {
-    this.$echarts
-      .init(document.getElementById("mapEchart"))
-      .setOption(this.mapOptions);
-    this.$echarts
-      .init(document.getElementById("stackEchart"))
-      .setOption(this.stackOption);
-    this.$echarts
-      .init(document.getElementById("breadEchart"))
-      .setOption(this.breadOptions);
+    this.$http.get("/works/findIndexOption").then(response => {
+      if (response.data.rtnCode == 200) {
+        var opData = response.data.data;
+        this.mapOption.series[0].data = opData;
+        this.$echarts
+          .init(document.getElementById("mapEchart"))
+          .setOption(this.mapOption);
+
+        var brData = [];
+        opData.forEach((element, index) => {
+          var obj = {};
+          obj.name = element.name;
+          obj.value = element.value[2];
+          brData[index] = obj;
+        });
+        this.breadOption.series[0].data = brData;
+        this.$echarts
+          .init(document.getElementById("breadEchart"))
+          .setOption(this.breadOption);
+
+        var xdata = [];
+        var serdata = [];
+        response.data.data.forEach((element, index) => {
+          xdata[index] = element.name;
+          serdata[index] = element.value[2];
+        });
+        this.stackOption.xAxis[0].data = xdata;
+        this.stackOption.series[0].data = serdata;
+        this.$echarts
+          .init(document.getElementById("stackEchart"))
+          .setOption(this.stackOption);
+      } else {
+        this.$message.error("数据加载失败");
+      }
+    });
   },
   methods: {}
 };
