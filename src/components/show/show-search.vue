@@ -94,7 +94,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .demo-table-expand {
   font-size: 0;
 }

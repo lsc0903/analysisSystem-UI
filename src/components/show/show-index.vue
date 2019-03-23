@@ -203,7 +203,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .row-map {
   height: 50%;
 }

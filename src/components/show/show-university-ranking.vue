@@ -4,14 +4,14 @@
       <el-card class="box-card">
         <el-col :span="24" style="ma">
           <el-row>
-            <strong class="screen-strong">地区：</strong>
             <el-checkbox-group v-model="provinceList" size="small">
+              <strong class="screen-strong">地区：</strong>
               <el-checkbox v-for="item in province" :label="item" :key="item" @change="search"></el-checkbox>
             </el-checkbox-group>
           </el-row>
           <el-row>
-            <strong class="screen-strong">类型一：</strong>
             <el-checkbox-group v-model="categoryOneList" size="small">
+              <strong class="screen-strong">类型一：</strong>
               <el-checkbox
                 v-for="item in categoryOne"
                 :label="item.id"
@@ -21,8 +21,8 @@
             </el-checkbox-group>
           </el-row>
           <el-row>
-            <strong class="screen-strong">类型二：</strong>
             <el-checkbox-group v-model="categoryTwoList" size="small">
+              <strong class="screen-strong">类型二：</strong>
               <el-checkbox
                 v-for="item in categoryTwo"
                 :label="item.id"
@@ -32,8 +32,8 @@
             </el-checkbox-group>
           </el-row>
           <el-row>
-            <strong class="screen-strong">来源：</strong>
             <el-checkbox-group v-model="sourceList" size="small">
+              <strong class="screen-strong">来源：</strong>
               <el-checkbox
                 v-for="item in source"
                 :label="item.id"
@@ -43,8 +43,8 @@
             </el-checkbox-group>
           </el-row>
           <el-row>
-            <strong class="screen-strong">年份-届：</strong>
             <el-checkbox-group v-model="yearTheList" size="small">
+              <strong class="screen-strong">年份-届：</strong>
               <el-checkbox
                 v-for="item in yearThe"
                 :label="item.id"
@@ -54,8 +54,8 @@
             </el-checkbox-group>
           </el-row>
           <el-row>
-            <strong class="screen-strong">获奖等级：</strong>
             <el-checkbox-group v-model="levelList" size="small">
+              <strong class="screen-strong">获奖等级：</strong>
               <el-checkbox
                 v-for="item in level"
                 :label="item.id"
@@ -94,7 +94,7 @@
   </el-row>
 </template>
 
-<script scope>
+<script>
 export default {
   data() {
     return {
@@ -246,6 +246,9 @@ export default {
 </script>
 
 <style>
+.el-checkbox-group {
+  font-size: 14px;
+}
 .demo-table-expand {
   font-size: 0;
 }
@@ -274,5 +277,6 @@ export default {
   width: 90px;
   margin-top: 2px;
   margin-bottom: 2px;
+  text-align: right;
 }
 </style>
