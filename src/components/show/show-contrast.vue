@@ -68,85 +68,42 @@ export default {
   data() {
     return {
       levelInfo: [],
+      levelSumInfo: [],
+      level: [],
+      university: [],
       columnarOption: {
         legend: {},
         tooltip: {},
         dataset: {
-          source: [
-            ["product", "2015", "2016", "2017"],
-            ["Matcha Latte", 43.3, 85.8, 93.7],
-            ["Milk Tea", 83.1, 73.4, 55.1],
-            ["Cheese Cocoa", 86.4, 65.2, 82.5],
-            ["Walnut Brownie", 72.4, 53.9, 39.1]
-          ]
+          source: []
         },
         xAxis: { type: "category" },
         yAxis: {},
-        // Declare several bar series, each will be mapped
-        // to a column of dataset.source by default.
-        series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }]
+        series: []
       },
       polylineOption: {
         tooltip: {
           trigger: "axis"
         },
         legend: {
-          data: ["邮件营销", "联盟广告", "视频广告", "直接访问", "搜索引擎"]
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
+          data: []
         },
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+          data: []
         },
         yAxis: {
           type: "value"
         },
-        series: [
-          {
-            name: "邮件营销",
-            type: "line",
-            stack: "总量",
-            data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: "联盟广告",
-            type: "line",
-            stack: "总量",
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: "视频广告",
-            type: "line",
-            stack: "总量",
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: "直接访问",
-            type: "line",
-            stack: "总量",
-            data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-            name: "搜索引擎",
-            type: "line",
-            stack: "总量",
-            data: [820, 932, 901, 934, 1290, 1330, 1320]
-          }
-        ]
+        series: []
       },
       radarOption: {
         tooltip: {},
         legend: {
-          data: ["预算分配（Allocated Budget）", "实际开销（Actual Spending）"]
+          data: []
         },
         radar: {
-          // shape: 'circle',
           name: {
             textStyle: {
               color: "#fff",
@@ -155,30 +112,12 @@ export default {
               padding: [3, 5]
             }
           },
-          indicator: [
-            { name: "销售（sales）", max: 6500 },
-            { name: "管理（Administration）", max: 16000 },
-            { name: "信息技术（Information Techology）", max: 30000 },
-            { name: "客服（Customer Support）", max: 38000 },
-            { name: "研发（Development）", max: 52000 },
-            { name: "市场（Marketing）", max: 25000 }
-          ]
+          indicator: []
         },
         series: [
           {
-            name: "预算 vs 开销（Budget vs spending）",
             type: "radar",
-            // areaStyle: {normal: {}},
-            data: [
-              {
-                value: [4300, 10000, 28000, 35000, 50000, 19000],
-                name: "预算分配（Allocated Budget）"
-              },
-              {
-                value: [5000, 14000, 28000, 31000, 42000, 21000],
-                name: "实际开销（Actual Spending）"
-              }
-            ]
+            data: []
           }
         ]
       },
@@ -191,77 +130,12 @@ export default {
           type: "scroll",
           orient: "vertical",
           right: 10,
-          top: 20,
-          bottom: 20
         },
         series: [
           {
-            name: "姓名",
+            name: "获奖总量",
             type: "pie",
-            radius: "55%",
-            center: ["40%", "50%"],
-            data: [
-              { name: "明卞岑", value: 83440 },
-              { name: "臧纪穆", value: 71565 },
-              { name: "乐许史", value: 52756 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "赵阮", value: 65505 },
-              { name: "蒋吕危", value: 37576 },
-              { name: "罗范", value: 81095 },
-              { name: "麻陶", value: 71399 },
-              { name: "董尤", value: 85359 },
-              { name: "奚齐", value: 33780 },
-              { name: "贝孟董", value: 17505 },
-              { name: "屈王韩", value: 14586 }
-            ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
+            data: []
           }
         ]
       },
@@ -282,181 +156,192 @@ export default {
       comparedOptionsValues: []
     };
   },
-  mounted() {
-    this.$echarts
-      .init(document.getElementById("columnarCharts"))
-      .setOption(this.columnarOption);
-    this.$echarts
-      .init(document.getElementById("polylineCharts"))
-      .setOption(this.polylineOption);
-    this.$echarts
-      .init(document.getElementById("radarCharts"))
-      .setOption(this.radarOption);
-    this.$echarts
-      .init(document.getElementById("pieCharts"))
-      .setOption(this.pieOption);
-  },
+
   methods: {
     search() {
-      this.$http
-      .post("/works/findLevelInfoByParam", {
-        type: this.comparedTypeValue,
-        data: this.comparedOptionsValues
-      })
-      .then(response => {
-        console.log(response.data)
-        if (response.data.rtnCode == 1100) {
-          this.levelInfo = response.data.data.levelInfo;
-          this.universityName = response.data.data.universityName;
-
-          //折线图-------------------------开始
-          var level = [];
-          var year = [];
-          this.levelInfo.forEach(element => {
-            var levelflag = true;
-            var yearflag = true;
-            level.forEach(el => {
-              if (el == element.name) {
-                levelflag = false;
-              }
-            });
-            year.forEach(el => {
-              if (el == element.yearTheName) {
-                levelflag = false;
-              }
-            });
-            if (levelflag) {
-              year.push(element.yearTheName);
-            }
-            if (yearflag) {
-              level.push(element.name);
-            }
-          });
-
-          this.polylineOptions.legend.data = level;
-          this.polylineOptions.xAxis.data = year;
-          var polylineSeries = [];
-          level.forEach(element => {
-            polylineSeries.push({
-              name: element,
-              type: "line",
-              stack: "获奖数量",
-              data: []
-            });
-          });
-          year.forEach(yearElement => {
-            polylineSeries.forEach(el => {
-              var flag = true;
-              this.levelInfo.forEach(element => {
-                if (el.name == element.name) {
-                  if (yearElement == element.yearTheName) {
-                    flag = false;
-                    el.data.push(element.sum);
-                  }
+      this.$options.methods.toSearch(this);
+    },
+    toSearch(_this) {
+      _this.$http
+        .post("/works/findLevelInfoByParam", {
+          type: _this.comparedTypeValue,
+          data: _this.comparedOptionsValues
+        })
+        .then(response => {
+          if (response.data.rtnCode == 200) {
+            _this.level = [];
+            _this.university = [];
+            _this.levelInfo = response.data.data.levelInfo;
+            _this.levelSumInfo = response.data.data.levelSumInfo;
+            //构造获奖等级，年份届，高校数组-------------开始
+            _this.levelInfo.forEach(element => {
+              var levelflag = true;
+              var universityflag = true;
+              _this.level.forEach(el => {
+                if (el == element.levelName) {
+                  levelflag = false;
                 }
               });
-              if (flag) {
-                el.data.push(0);
+              _this.university.forEach(el => {
+                if (el == element.universityName) {
+                  universityflag = false;
+                }
+              });
+              if (levelflag) {
+                _this.level.push(element.levelName);
+              }
+              if (universityflag) {
+                _this.university.push(element.universityName);
               }
             });
-          });
-          this.polylineOptions.series = polylineSeries;
-          this.$echarts
-            .init(document.getElementById("polylineCharts"))
-            .setOption(this.polylineOptions);
-          //折线图----------------------------结束
+            //构造获奖等级，年份届，高校数组-------------结束
 
-          //饼状图----------------------------开始
-          var levelSumInfo = response.data.data.levelSumInfo;
-          var pieLevel = [];
-          levelSumInfo.forEach(el => {
-            pieLevel.push(el.name);
-            el.value = el.sum;
-          });
-          this.pieOptions.legend.data = pieLevel;
-          this.pieOptions.series[0].data = levelSumInfo;
-          this.$echarts
-            .init(document.getElementById("pieCharts"))
-            .setOption(this.pieOptions);
-          //饼状图----------------------------结束
+            //构造柱状图options-------------------开始
+            //类型，图例
+            let columnarLevel = new Array();
+            columnarLevel = columnarLevel.concat(_this.level);
+            columnarLevel.unshift("product");
+            let columnarData = new Array();
+            columnarData.push(columnarLevel);
+            _this.university.forEach(universityElement => {
+              let columnarSourceData = new Array();
+              columnarSourceData.push(universityElement);
+              _this.level.forEach(columnarLevelElement => {
+                let flag = true;
+                _this.levelInfo.forEach(element => {
+                  if (
+                    element.levelName == columnarLevelElement &&
+                    element.universityName == universityElement
+                  ) {
+                    columnarSourceData.push(element.sum);
+                    flag = false;
+                  }
+                });
+                if (flag) {
+                  columnarSourceData.push(0);
+                }
+              });
+              columnarData.push(columnarSourceData);
+            });
+            let columnarSeries = new Array();
+            _this.level.forEach(ele => {
+              columnarSeries.push({ type: "bar" });
+            });
+            _this.columnarOption.series = columnarSeries;
+            _this.columnarOption.dataset.source = columnarData;
+            _this.$echarts
+              .init(document.getElementById("columnarCharts"))
+              .setOption(_this.columnarOption,true);
+            //构造柱状图options-------------------结束
 
-          //柱状图----------------------------开始
-          var source = [];
-          var columnarLevel = [];
-          columnarLevel = columnarLevel.concat(level)
-          columnarLevel.unshift("product");
-          source.push(columnarLevel);
-          
-          year.forEach(yearElement => {
-            var data = [];
-            data.push(yearElement);
-            level.forEach(el => {
-              var flag = true;
-              this.levelInfo.forEach(element => {
-                if (element.name == el) {
-                  if (element.yearTheName == yearElement) {
+            //构造雷达图options-------------------开始
+            //几边
+            let radarIndicator = [];
+            _this.level.forEach(element => {
+              radarIndicator.push({name: element, max: 10})
+            });
+            //数据
+            let radarData = [];
+            _this.university.forEach(uniElement => {
+              let data = {};
+              let value = [];
+              radarIndicator.forEach(indElement =>{
+                let flag = true;
+                _this.levelInfo.forEach(element => {
+                    if(element.universityName == uniElement && element.levelName == indElement.name){
+                      flag = false;
+                      value.push(element.sum);
+                    }
+                });
+                if(flag){
+                  value.push(0);
+                }
+              });
+              data.name = uniElement;
+              data.value = value;
+              radarData .push(data);
+            });
+            console.log(radarData);
+            _this.radarOption.series[0].data =  radarData;
+            _this.radarOption.radar.indicator = radarIndicator;
+            //图例
+            _this.radarOption.legend.data = _this.university;
+            _this.$echarts
+              .init(document.getElementById("radarCharts"))
+              .setOption(_this.radarOption,true);
+            //构造雷达图options-------------------结束
+
+            //构造饼图options-------------------开始
+            let pieData = [];
+            _this.levelSumInfo.forEach(element => {
+              pieData.push({name:element.name, value:element.sum})
+            });
+            console.log(pieData);
+            _this.pieOption.series[0].data = pieData;
+            _this.$echarts
+              .init(document.getElementById("pieCharts"))
+              .setOption(_this.pieOption,true);
+            //构造饼图options-------------------结束
+          } else {
+            _this.$message.error("数据加载错误");
+          }
+        });
+
+      _this.$http
+        .post("/works/findPolylineLevelInfoByParam", {
+          type: _this.comparedTypeValue,
+          data: _this.comparedOptionsValues
+        })
+        .then(response => {
+          if (response.data.rtnCode == 200) {
+            //构造折线图options-------------------开始
+            let polyLineLevelInfo = response.data.data.levelInfo;
+            //高校信息，年份信息，
+            let polyLineUniversity = new Array;
+            let polyLineYear = response.data.data.yearTheOptions;
+            polyLineLevelInfo.forEach(element => {
+              let universityFlag = true;
+              polyLineUniversity.forEach(uElement => {
+                if(uElement == element.universityName){
+                  universityFlag = false;
+                }
+              });
+              if(universityFlag){
+                polyLineUniversity.push(element.universityName)
+              }
+            });
+            let polyLineSeries = new Array;
+            polyLineUniversity.forEach(universityElement => {
+              let seriesData = {};
+              seriesData.name = universityElement;
+              seriesData.type = "line";
+              let data = new Array;
+              polyLineYear.forEach(yearElement => {
+                let flag = true;
+                polyLineLevelInfo.forEach(element => {
+                  if(element.universityName == universityElement && element.yearName == yearElement){
+                    flag = false;
                     data.push(element.sum);
-                    flag = false;
                   }
+                });
+                if(flag){
+                  data.push(0);
                 }
               });
-              if (flag) {
-                data.push(0);
-              }
+              seriesData.data = data;
+              polyLineSeries.push(seriesData); 
             });
-            source.push(data);
-          });
-          var columnarSeries = [];
-          level.forEach(element => {
-            columnarSeries.push({type: 'bar'});
-          });
-          this.columnarOptions.dataset.source = source;
-          this.columnarOptions.series = columnarSeries;
-          this.$echarts
-            .init(document.getElementById("columnarCharts"))
-            .setOption(this.columnarOptions);
-          //柱状图----------------------------结束
-
-
-          //雷达图----------------------------开始
-
-          this.radarOptions.legend.data = year;
-          var radarIndicator = [];
-          level.forEach(element => {
-            radarIndicator.push({name:element,max:50});
-          });
-          this.radarOptions.radar.indicator = radarIndicator;
-          var radarData = [];
-          year.forEach(yearElement => {
-            var seriesData = {};
-            var data = [];
-              seriesData.name = yearElement;
-            radarIndicator.forEach(el => {
-              var flag = true;
-              this.levelInfo.forEach(element => {
-                if (element.name == el.name) {
-                  if (element.yearTheName == yearElement) {
-                    data.push(element.sum);
-                    flag = false;
-                  }
-                }
-              });
-              if (flag) {
-                data.push(0);
-              }
-              seriesData.value = data;
-            });
-            radarData.push(seriesData);
-          });
-          this.radarOptions.series[0].data = radarData;
-          this.$echarts
-            .init(document.getElementById("radarCharts"))
-            .setOption(this.radarOptions);
-          //雷达图----------------------------结束
-        } else {
-          this.$message.error("数据加载错误");
-        }
-      });
+            _this.polylineOption.series = polyLineSeries;
+            _this.polylineOption.legend.data = polyLineUniversity;
+            _this.polylineOption.xAxis.data = polyLineYear;
+            _this.$echarts
+              .init(document.getElementById("polylineCharts"))
+              .setOption(_this.polylineOption,true);
+            //构造折线图options-------------------结束
+          } else {
+            _this.$message.error("折线图数据加载错误");
+          }
+        });
     },
     typeChange() {
       this.comparedOptionsValues = [];
@@ -471,7 +356,11 @@ export default {
             this.$message.error("数据加载错误");
           }
         });
+      this.$options.methods.toSearch(this);
     }
+  },
+  mounted() {
+    this.toSearch(this);
   }
 };
 </script>

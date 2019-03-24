@@ -139,13 +139,13 @@ export default {
             });
             year.forEach(el => {
               if (el == element.yearTheName) {
-                levelflag = false;
+                yearflag = false;
               }
             });
-            if (levelflag) {
+            if (yearflag) {
               year.push(element.yearTheName);
             }
-            if (yearflag) {
+            if (levelflag) {
               level.push(element.name);
             }
           });
