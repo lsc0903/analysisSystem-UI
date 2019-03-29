@@ -17,10 +17,11 @@
       <div class="ana-header-right">
         <el-dropdown trigger="click">
           <span class="el-dropdown-link" style="margin-right: 20px;">
-            <i class="el-icon-arrow-down el-icon--right" style="margin-right: 15px"></i>王小虎
+            <i class="el-icon-arrow-down el-icon--right" style="margin-right: 15px"></i>
+            {{ this.$store.state.name }}
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -28,7 +29,14 @@
   </el-row>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      this.$store.commit("CLEAR_USERINFO");
+      this.$router.push("login");
+    }
+  }
+};
 </script>
 <style scope>
 a[data-v-8c30bf14] {

@@ -300,7 +300,6 @@ export default {
         });
     }
   },
-  //wei搜索框绑定事件
   created: function() {
     // var lett = this;
     // document.onkeydown = function(e) {

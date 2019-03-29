@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from './store';
 
 Vue.use(Router);
 
@@ -28,10 +29,16 @@ const ShowSearch = () => import('@/components/show/show-search.vue');
 const ShowContrast = () => import('@/components/show/show-contrast.vue');
 const ShowUniversityRanking = () => import('@/components/show/show-university-ranking.vue');
 const ShowDetails = () => import('@/components/show/show-details.vue');
+const Login = () => import('@/components/login.vue');
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [{
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
       path: '/',
       name: 'show',
       component: Show,
@@ -71,62 +78,98 @@ export default new Router({
     {
       path: '/adminHeader',
       name: 'adminHeader',
-      component: AdminHeader
+      component: AdminHeader,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/adminLeft',
       name: 'adminLeft',
-      component: AdminLeft
+      component: AdminLeft,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/admin',
       name: 'admin',
       component: Admin,
       redirect: 'adminIndex',
+      meta: {
+        requiresAuth: true
+      },
       children: [{
           path: '/adminIndex',
           name: 'adminIndex',
-          component: AdminIndex
+          component: AdminIndex,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminCategory',
           name: 'adminCategory',
-          component: AdminCategory
+          component: AdminCategory,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminLevel',
           name: 'adminLevel',
-          component: AdminLevel
+          component: AdminLevel,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminSource',
           name: 'adminSource',
-          component: AdminSource
+          component: AdminSource,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminUnitype',
           name: 'adminUnitype',
-          component: AdminUnitype
+          component: AdminUnitype,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminUniversity',
           name: 'adminUniversity',
-          component: AdminUniversity
+          component: AdminUniversity,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminYearthe',
           name: 'adminYearthe',
-          component: AdminYearthe
+          component: AdminYearthe,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminUser',
           name: 'adminUser',
-          component: AdminUser
+          component: AdminUser,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/adminResults',
           name: 'adminResults',
-          component: AdminResults
+          component: AdminResults,
+          meta: {
+            requiresAuth: true
+          }
         },
       ]
     },
@@ -136,3 +179,28 @@ export default new Router({
     },
   ]
 })
+
+
+// 页面刷新时，重新赋值有没登录
+if (window.localStorage.getItem('userName')) {
+  store.commit('SAVE_USERINFO', {
+    userName: window.localStorage.getItem("userName"),
+    name: window.localStorage.getItem("name")
+  });
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(r => r.meta.requiresAuth)) { // 判断该路由是否需要登录权限
+    if (store.state.userName != "" && store.state.name != "") { // 通过vuex 如果登录
+      next();
+    } else {
+      next({
+        path: '/login',
+      })
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;

@@ -4,13 +4,23 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  userinfo: JSON.parse(localStorage.getItem('userinfo'))
+  userName: "",
+  name: ""
 }
 
 const mutations = {
-  SAVE_USERINFO (state,userinfo){
-    localStorage.setItem('userinfo',JSON.stringify(userinfo))
-    state.userinfo = userinfo
+  SAVE_USERINFO(state, userinfo) {
+    localStorage.setItem('userName', userinfo.userName)
+    localStorage.setItem('name', userinfo.name)
+    state.userName = userinfo.userName
+    state.name = userinfo.name
+  },
+  CLEAR_USERINFO(state) {
+    localStorage.clear('userName')
+    localStorage.clear('name')
+    state.userName = ""
+    state.name = ""
+
   }
 }
 
