@@ -188,7 +188,11 @@ export default {
               if (response.data.rtnCode == 200) {
                 _this.$message.success("保存成功");
               } else {
-                _this.$message.error("保存失败");
+                if(response.data.msg == "failure"){
+                  _this.$message.error("保存失败");
+                }else{
+                  _this.$message.error(response.data.msg);
+                }
               }
               _this.$options.methods.reset(_this);
               _this.$options.methods.performPage(_this);

@@ -285,7 +285,7 @@ export default {
       }
     },
     handleSuccess(response, file) {
-      var imgUrl = "http://poih8r8be.bkt.clouddn.com/" + response.key;
+      var imgUrl = "http://qiniu.lsc0903.club/" + response.key;
       this.$data.form.imgUrls.push({ uid: file.uid, url: imgUrl, imgName: file.name });
     },
     handleError(err, file) {
